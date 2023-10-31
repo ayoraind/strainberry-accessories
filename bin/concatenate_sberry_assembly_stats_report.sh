@@ -2,7 +2,7 @@
 
 # # Make sure to set the variables when calling the script
 # Example:
-# ./concatenate_report_file.sh --parent_directory "/path/to/parent" --output_filename "output.tsv" --output_dir "/path/to/output"
+# ./concatenate_sberry_assembly_stats_report.sh --parent_directory "/path/to/parent" --output_filename "output.tsv" --output_dir "/path/to/output"
 
 # Default values
 parent_directory=""
