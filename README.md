@@ -33,6 +33,12 @@ An example of a command to run this pipeline is:
 nextflow run main.nf --reads "Sample_files/*.fasta" --reference_file "reference_file.csv" --output_dir "test2"
 ```
 
+The reference file contains the reference genome id and the filepath to the reference genome. For instance;
+
+```
+Eco20021,/file/path/to/Eco20021.fasta
+Eco29291,/file/path/to/Eco29291.fasta
+```
 ## Project
 This is an ongoing project at the Microbial Genome Analysis Group, Institute for Infection Prevention and Hospital Epidemiology, Üniversitätsklinikum, Freiburg. The project is funded by BMBF, Germany, and is led by [Dr. Sandra Reuter](https://www.uniklinik-freiburg.de/iuk-en/infection-prevention-and-hospital-epidemiology/research-group-reuter.html).
 
