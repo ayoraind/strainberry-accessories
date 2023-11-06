@@ -21,7 +21,7 @@ final_params = check_params(merged_params)
 pipeline_start_message(version, final_params)
 
 // include processes
-include { ASSEMBLY_STATS  } from './modules/processes.nf' addParams(final_params)
+include { ASSEMBLY_STATS; COMBINE_ASSEMBLY_STATS_REPORT } from './modules/processes.nf' addParams(final_params)
 
 workflow  {
 
@@ -35,7 +35,11 @@ workflow  {
 				
 	   combined_ch = assemblies_ch.combine(reference_ch)
 
-	  ASSEMBLY_STATS(combined_ch)
+	   ASSEMBLY_STATS(combined_ch)
+	  
+	   collected_assembly_statistics_ch = ASSEMBLY_STATS.out.report_ch.collect( sort: {a, b -> a[0].getBaseName() <=> b[0].getBaseName()} )
+
+           COMBINE_ASSEMBLY_STATS_REPORT(collected_assembly_statistics_ch)
 }
 
 workflow.onComplete {
