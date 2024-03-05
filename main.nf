@@ -27,7 +27,8 @@ workflow  {
 
 	   assemblies_ch = channel
                                 .fromPath( final_params.assemblies, checkIfExists: true )
-                                .map { file -> tuple(file.simpleName, file) }
+                              //  .map { file -> tuple(file.simpleName, file) }
+				.map { file -> tuple(file.baseName, file) }
 				.ifEmpty { error "Cannot find any assemblies matching: ${final_params.assemblies}" }
 				
 	   reference_ch = channel
@@ -38,8 +39,10 @@ workflow  {
 	   ASSEMBLY_STATS(combined_ch)
 	  
 	   collected_assembly_statistics_ch = ASSEMBLY_STATS.out.report_ch.collect( sort: {a, b -> a[0].getBaseName() <=> b[0].getBaseName()} )
+	   
+	  // collected_assembly_statistics_ch.view()
 
-           COMBINE_ASSEMBLY_STATS_REPORT(collected_assembly_statistics_ch)
+          COMBINE_ASSEMBLY_STATS_REPORT(collected_assembly_statistics_ch)
 }
 
 workflow.onComplete {
