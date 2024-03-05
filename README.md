@@ -1,4 +1,4 @@
-## Pre-assembly QC workflow.
+## Post-assembly QC workflow.
 ### Usage
 
 ```
