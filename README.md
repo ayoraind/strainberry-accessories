@@ -23,7 +23,7 @@
 
 
 ## Introduction
-This pipeline generates post-assembly QC information. A large percentage of this pipeline was adapted from the [Strainberry github page](https://github.com/rvicedomini/strainberry) and the [Strainberry analysis page](https://github.com/rvicedomini/strainberry-analyses/tree/main). 
+This pipeline generates post-assembly QC information. A large percentage of this pipeline was adapted from the [Strainberry Github page](https://github.com/rvicedomini/strainberry) and the [Strainberry analysis page](https://github.com/rvicedomini/strainberry-analyses/tree/main). 
 
 
 ## Sample command
