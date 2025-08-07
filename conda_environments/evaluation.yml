@@ -5,6 +5,7 @@ dependencies:
   - python>=3.7.9
   - biopython>=1.78
   - mummer4>=4.0.0beta2
+  - pybedtools
   - numpy>=1.17.4
   - scipy>=1.2.1
   - pandas>=1.0.3
