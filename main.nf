@@ -58,12 +58,18 @@ workflow  {
 				 
 		// output is [5925-200127, /path/to/5925-200127_contigs_filtered.fa]
 
-	best_contig_adjusted_ch =	EXTRACT_BEST_CONTIG_PER_REFERENCE.out.best_contig_ch.flatMap { meta, fastas ->
-							fastas.collect { fasta ->
-							def ref = fasta.getName().tokenize('.')[1] // extracts the reference name
-            					tuple(groupKey(meta, fastas.size()), ref, fasta)              // preserve group size with key
-        								}
-		}
+	best_contig_adjusted_ch = EXTRACT_BEST_CONTIG_PER_REFERENCE.out.best_contig_ch
+									.groupTuple(by: 0) // groups all tuples that have the same meta
+									.flatMap { meta, fastas -> 
+									def flattenedFastas = fastas.flatten() // some fastas contained nested arrays, so had to be flattened
+											flattenedFastas.collect { fasta -> 
+											def ref = fasta.getName().tokenize('.')[1] // in assembly.5925-200127.fasta, pick the second element (5925-200127)
+									// tuple(groupKey(meta, fastas.size()), ref, fasta)
+											tuple(meta, ref, fasta)
+									}
+	}
+	 
+	// best_contig_adjusted_ch.view()
 		// output is [ERR13964273, 5925-200127, /path/to/work/3b/7421439015a3923a151d7629c8151c/ERR13964273/assembly.5925-200127.fasta]
 	best_contig_adjusted_ch_transformed = best_contig_adjusted_ch.map { meta_id, ref_id, assembly_path -> 
 								[ref_id, meta_id, assembly_path]
